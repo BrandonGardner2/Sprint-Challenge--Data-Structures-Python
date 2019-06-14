@@ -9,10 +9,13 @@ class RingBuffer:
         self.iterate()
 
     def get(self):
-        return [i for i in self.storage if i != None]
+        if self.storage[-1] == None:
+            return self.storage[:self.current]
+        else:
+            return self.storage
 
     def iterate(self):
-        if self.current == len(self.storage) - 1:
+        if self.current == self.capacity - 1:
             self.current = 0
         else:
             self.current += 1
